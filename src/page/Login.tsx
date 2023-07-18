@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 interface SignupFormInputs {
   email: string;
@@ -21,41 +22,95 @@ function Login() {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-4 max-w-[400px] mx-auto bg-slate-600 rounded-lg p-10">
-          <div className="grid gap-1">
-            <label className="text-sm font-medium text-slate-100" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="p-2 rounded-md my-2 text-slate-100 placeholder:text-sm"
-              id="email"
-              placeholder="Enter your email"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              {...register("email", { required: "Email is required" })}
-            />
-            {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
-            <label className="text-sm font-medium text-slate-100 " htmlFor="email">
-              Password
-            </label>
-            <input
-              id="password"
-              className="p-2 rounded-md my-2 text-slate-100 placeholder:text-sm"
-              placeholder="Enter your password"
-              type="password"
-              autoCapitalize="none"
-              autoCorrect="off"
-              {...register("password", { required: "Password is required" })}
-            />
-            {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
-          
+      <div className="m-auto xl:container px-12 sm:px-0 mx-auto ">
+        <div className="mx-auto h-full sm:w-max">
+          <div className="m-auto  py-12">
+            <div className="mt-12 rounded-3xl border    -mx-6 sm:-mx-10 p-8 sm:p-10">
+              <h3 className="text-2xl font-semibold  ">Sign in</h3>
+
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="mt-10 space-y-8 dark:text-white"
+              >
+                <div>
+                  <div
+                    className={`relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-sky-400 dark:before:bg-sky-800 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-400 before:transition before:duration-300 ${
+                      errors.email ? "before:bg-red-400" : ""
+                    }`}
+                  >
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Your email or user name"
+                      {...register("email", { required: "Email is required" })}
+                      className={`w-full bg-transparent pb-3 border-b border-gray-300 dark:placeholder-gray-300 text-gray-400   dark:border-gray-600 outline-none ${
+                        errors.email ? "invalid:border-red-400" : ""
+                      } transition`}
+                    />
+                  </div>
+                  {errors.email && (
+                    <span className="text-red-400">
+                      {/* {errors.email.message} */}
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-col items-end">
+                  <div
+                    className={`w-full relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-sky-400 dark:before:bg-sky-800 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-400 before:transition before:duration-300 ${
+                      errors.password ? "before:bg-red-400" : ""
+                    }`}
+                  >
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="Your password"
+                      {...register("password", {
+                        required: "Password is required",
+                      })}
+                      className={`w-full bg-transparent pb-3 border-b border-gray-600 placeholder-red-500  dark:placeholder-gray-300 dark:border-gray-600 text-gray-400  outline-none ${
+                        errors.password ? "invalid:border-red-400" : ""
+                      } transition`}
+                    />
+                  </div>
+                  {errors.password && (
+                    <span className="text-red-400">
+                      {errors.password.message}
+                    </span>
+                  )}
+                  <button type="reset" className="-mr-3 w-max p-3">
+                    <span className="text-sm tracking-wide text-sky-600 dark:text-sky-400">
+                      Forgot password ?
+                    </span>
+                  </button>
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    className="w-full rounded-full bg-sky-500 dark:bg-sky-400 h-11 flex items-center justify-center px-6 py-3 transition hover:bg-sky-600 focus:bg-sky-600 active:bg-sky-800"
+                  >
+                    <span className="text-base font-semibold text-white dark:text-gray-900">
+                      Login
+                    </span>
+                  </button>
+                  <div className="text-center">
+                    <span> or Sign in with</span>
+
+                  </div>
+                  <button type="reset" className="-ml-3 w-max p-3">
+                    <span className="text-sm tracking-wide text-sky-600 dark:text-sky-400">
+                      Don't have an account?
+                      <Link to="/sign-up">Register</Link>
+                    </span>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div className="border-t pt-12 text-gray-500 dark:border-gray-800"></div>
           </div>
-          <button className="btn">Login</button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
