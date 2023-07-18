@@ -1,11 +1,11 @@
-import Navbar from "../components/ui/Navbar/Navbar"
+import Footer from "../components/ui/Footer/Footer";
 
 function Home() {
   return (
-   <div>
-    <Navbar/>
-   </div>
-  )
+    <div>
+      <Footer/>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
