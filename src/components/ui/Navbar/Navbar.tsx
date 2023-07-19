@@ -1,6 +1,19 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setUser } from "../../../redux/features/user/userSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebase/firebase.config";
 
 function Navbar() {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      dispatch(setUser(null));
+    });
+  };
+
   return (
     <div className="navbar bg-blue-950 text-slate-50">
       <div className="navbar-start">
@@ -53,7 +66,9 @@ function Navbar() {
         <Link to="/register" className="p-4 cursor-pointer text-xl">
           Register
         </Link>
-        <a className="btn btn-error">Logout</a>
+        <a onClick={handleLogout} className="btn btn-error">
+          Logout
+        </a>
       </div>
     </div>
   );
