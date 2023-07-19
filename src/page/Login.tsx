@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { createUser } from "../redux/features/user/userSlice";
 
 interface SignupFormInputs {
   email: string;
@@ -15,6 +17,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignupFormInputs>();
+
 
   const onSubmit = (data: SignupFormInputs) => {
     console.log(data);
