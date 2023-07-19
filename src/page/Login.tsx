@@ -1,18 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/features/user/userSlice";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useEffect } from "react";
+import { toast } from 'react-toastify';
 
 interface SignupFormInputs {
   email: string;
   password: string;
 }
 function Login() {
+  const navigate = useNavigate();
+  const { user, isLoading, isError, error } = useAppSelector((state: { user: any }) => state.user);
   const {
     register,
     handleSubmit,
@@ -21,10 +27,21 @@ function Login() {
 
   const dispatch = useAppDispatch();
 
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+
   const onSubmit = (data: SignupFormInputs) => {
     dispatch(loginUser({email : data.email, password: data.password}))
-    
   };
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate(from, { replace: true });
+      toast.success("User loggedin Successfully");
+    }
+  }, [user.email, isLoading, navigate, from]);
+  if (isError) {
+    toast.error(error); 
+  }
   return (
     <div className="m-auto xl:container px-12 sm:px-0 mx-auto ">
       <div className="mx-auto h-full sm:w-max">
