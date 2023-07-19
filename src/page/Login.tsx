@@ -5,7 +5,8 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { createUser } from "../redux/features/user/userSlice";
+import { loginUser } from "../redux/features/user/userSlice";
+import { useAppDispatch } from "../redux/hooks";
 
 interface SignupFormInputs {
   email: string;
@@ -18,10 +19,11 @@ function Login() {
     formState: { errors },
   } = useForm<SignupFormInputs>();
 
+  const dispatch = useAppDispatch();
 
   const onSubmit = (data: SignupFormInputs) => {
-    console.log(data);
-    // dispatch(createUser({email : data.email, password: data.password}))
+    dispatch(loginUser({email : data.email, password: data.password}))
+    
   };
   return (
     <div className="m-auto xl:container px-12 sm:px-0 mx-auto ">
