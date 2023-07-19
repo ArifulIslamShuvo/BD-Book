@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
-import userSlice from "./features/user/userSlice";
+import userReducer from "./features/user/userSlice";
+import { api } from "./api/apiSlice";
+import bookReducer from "./features/product/bookSlice";
 export const store = configureStore({
   reducer: {
-    user: userSlice,
+    books: bookReducer,
+    user: userReducer,
+    [api.reducerPath]: api.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
