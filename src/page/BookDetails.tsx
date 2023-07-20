@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -6,7 +7,9 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
 import { useParams } from "react-router-dom";
-import { useSingleBookQuery } from "../redux/features/product/bookApi";
+import { useGetReviewsQuery, usePostReviewMutation, useSingleBookQuery } from "../redux/features/product/bookApi";
+import { useState } from "react";
+import { useAppDispatch } from "../redux/hooks";
 
 export default function BookDetails() {
   const { id } = useParams();
@@ -15,6 +18,24 @@ export default function BookDetails() {
   console.log(data);
   console.log(isLoading);
   console.log(error);
+
+  const [inputValue, setInputValue] = useState<string>("");
+  const dispatch = useAppDispatch();
+
+  const [postReview] = usePostReviewMutation();
+  const { data:book } = useGetReviewsQuery(id);
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    console.log(inputValue);
+    const options = {
+      id: id,
+      data: { review: inputValue },
+    };
+
+    postReview(options);
+    setInputValue("");
+  };
 
   return (
     <div>
@@ -26,9 +47,7 @@ export default function BookDetails() {
           <h1 className="text-3xl font-semibold">{data?.title}</h1>
           <p>
             by -{" "}
-            <span className="text-blue-600 font-bold px-2">
-              {data?.author}
-            </span>
+            <span className="text-blue-600 font-bold px-2">{data?.author}</span>
           </p>
           <p>
             Category:{" "}
@@ -40,23 +59,41 @@ export default function BookDetails() {
             Publication Date:{" "}
             <span className="font-bold px-2">{data?.publication_date}</span>
           </p>
-
-
+          <div className="">
+            <button className="btn btn-warning mr-4">Edit Book</button>
+            <button className="btn btn-error">Delete Book</button>
+          </div>
         </div>
       </div>
-      
+
       <div className="flex max-w-12xl mx-auto items-center border-gray-300 pb-8 px-32 pt-4">
-        {data?.reviews?.map((review: string) => (
-          <>
+        <form onSubmit={handleSubmit} className="w-[75%] flex items-center">
+          <textarea
+            className="textarea textarea-primary w-[75%]"
+            placeholder="Review"
+            onChange={(e) => setInputValue(e.target.value)}
+            value={inputValue}
+          ></textarea>
+          <button
+            type="submit"
+            className="btn bg-primary p-4 rounded-lg ml-2 cursor-pointer"
+          >
+           Send
+          </button>
+        </form>
+      </div>
+      {book?.reviews?.map((review: string) => (
+        <>
+          <div className="flex max-w-12xl mx-auto items-center border-gray-300 pb-4 px-32 pt-1">
             <div className="w-10 rounded-full mr-4">
               <img src={data?.profile} />
             </div>
             <div>
               <p>{review}</p>
             </div>
-          </>
-        ))}
+          </div>
+        </>
+      ))}
       </div>
-    </div>
   );
 }
