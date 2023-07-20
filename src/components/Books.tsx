@@ -6,6 +6,7 @@
 
 import { useGetBooksQuery } from "../redux/features/product/bookApi";
 import { IBooks } from "../types/globalTypes";
+import BookCard from "./ui/BookCard/BookCard";
 
 export default function Books() {
   const { data, isLoading, error } = useGetBooksQuery(undefined);
@@ -13,15 +14,17 @@ export default function Books() {
   console.log(data);
   console.log(isLoading);
   console.log(error);
+  //   {data?.data?.map((book: IBooks) => (
+  //     <BookCard book={book} key={book.title} />
+  // ))}
   return (
       <div className="text-center py-8">
         <h2 className="font-bold text-3xl">Our Books Catalog</h2>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-8 ml-10 mt-10">
           {data.map((book: IBooks) => (
-            <div key={book._id} className="">
-              <div className="card card-compact w-96 bg-red-100 shadow-xl">
+              <div key={book._id} className="card card-compact md:w-96 bg-red-100 shadow-xl">
                 <figure>
-                  <img src={book.img} className="h-40" alt="Book" />
+                  <img src={book.img} className="h-40 w-32 pt-5" alt="Book" />
                 </figure>
 
                 <div className="card-body text-center">
@@ -43,7 +46,6 @@ export default function Books() {
                     <button className="btn btn-primary">Add Book</button>
                   </div>
                 </div>
-              </div>
             </div>
           ))}
         </div>
