@@ -3,6 +3,8 @@ import App from '../App';
 import Home from '../page/Home';
 import Login from '../page/Login';
 import Register from '../page/Register';
+import PrivateRoute from './PrivateRoute';
+import BookDetails from '../page/BookDetails';
 
 
 const routes = createBrowserRouter([
@@ -13,6 +15,14 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: <Home/>
+      },
+      {
+        path: "/book-details/:id",
+        element: (
+          <PrivateRoute>
+              <BookDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path:'/login',

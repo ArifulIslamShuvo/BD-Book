@@ -45,9 +45,11 @@ function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a>All Books</a>
-            </li>
+            <Link to="/all-books">
+              <li>
+                <a>All Books</a>
+              </li>
+            </Link>
 
             <li>
               <a>Item 3</a>
@@ -58,9 +60,11 @@ function Navbar() {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>All Books</a>
-          </li>
+          <Link to="/all-books">
+            <li>
+              <a>All Books</a>
+            </li>
+          </Link>
           <li>
             <a>Item 3</a>
           </li>

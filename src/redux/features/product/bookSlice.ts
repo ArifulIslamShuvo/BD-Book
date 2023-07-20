@@ -1,26 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface IBooks {
-  status: boolean;
-  priceRange: number;
+interface FilterState {
+  genre: string | null;
+  publicationYear: string | null;
 }
 
-const initialState: IBooks = {
-  status: false,
-  priceRange: 150,
+const initialState: FilterState = {
+  genre: null,
+  publicationYear: null,
 };
 
 const bookSlice = createSlice({
-  name: "books",
+  name: "book",
   initialState,
   reducers: {
-    toggleState: (state) => {
-      state.status = !state.status;
+    setGenreFilter: (state, action: PayloadAction<string | null>) => {
+      state.genre = action.payload;
+    },
+    setPublicationYearFilter: (state, action: PayloadAction<string | null>) => {
+      state.publicationYear = action.payload;
     },
   },
 });
 
-export const { toggleState } = bookSlice.actions;
+export const { setGenreFilter, setPublicationYearFilter } = bookSlice.actions;
 
 export default bookSlice.reducer;
