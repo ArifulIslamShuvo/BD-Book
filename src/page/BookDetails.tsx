@@ -66,8 +66,8 @@ export default function BookDetails() {
         </div>
       </div>
 
-      <div className="flex max-w-12xl mx-auto items-center border-gray-300 pb-8 px-32 pt-4">
-        <form onSubmit={handleSubmit} className="w-[75%] flex items-center">
+      <div className="flex max-w-12xl mx-auto items-center justify-center  border-gray-300 pb-8 px-32 pt-4">
+        <form onSubmit={handleSubmit} className="w-[75%] flex items-center ">
           <textarea
             className="textarea textarea-primary w-[75%]"
             placeholder="Review"
@@ -84,12 +84,12 @@ export default function BookDetails() {
       </div>
       {book?.reviews?.map((review: string) => (
         <>
-          <div className="flex max-w-12xl mx-auto items-center border-gray-300 pb-4 px-32 pt-1">
+          <div className="flex items-center justify-start max-w-full mx-auto  pb-4 px-32 pt-1">
             <div className="w-10 rounded-full mr-4">
               <img src={data?.profile} />
             </div>
             <div>
-              <p>{review}</p>
+              <p className="ml-40 text-yellow-50">{review}</p>
             </div>
           </div>
         </>

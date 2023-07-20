@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
+import { IBooks } from "../../../types/globalTypes";
 import { api } from "../../api/apiSlice";
 
 const bookApi = api.injectEndpoints({
@@ -10,7 +11,17 @@ const bookApi = api.injectEndpoints({
     }),
     singleBook: builder.query({
       query: (id) => `/book/${id}`,
+      providesTags: ["books"],
     }),
+    addBook: builder.mutation<IBooks, Partial<IBooks>>({
+      query: (data) => ({
+        url: "/book",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["books"],
+    }),
+
     postReview: builder.mutation({
       query: ({ id, data }) => ({
         url: `/review/${id}`,
@@ -31,4 +42,5 @@ export const {
   useSingleBookQuery,
   usePostReviewMutation,
   useGetReviewsQuery,
+  useAddBookMutation,
 } = bookApi;

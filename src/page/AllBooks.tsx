@@ -33,38 +33,41 @@ export default function AllBooks() {
       );
     }
   );
- 
-  
-  
+
   return (
     <div className="text-center py-8">
-      <h2 className="font-bold text-3xl">All Books Catalog</h2>
+      <h2 className="font-bold text-3xl">Search Books</h2>
 
       <div className="max-w-md mx-auto flex p-3 my-5 rounded-lg ">
-      <input
-       onChange={handleSearchChange}
-        type="text"
-        className="w-full border border-gray-300 rounded-l-md py-2 px-3 focus:outline-none focus:border-blue-500"
-        placeholder="Search..."
-      />
-      <button className="bg-blue-600 text-white px-4 py-2 rounded-r-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M15 15l5-5-5-5"
-          />
-        </svg>
-      </button>
-    </div>
+        <input
+          onChange={handleSearchChange}
+          type="text"
+          className="w-full border border-gray-300 rounded-l-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          placeholder="Search..."
+        />
+        <button className="bg-blue-600 text-white px-4 py-2 rounded-r-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 15l5-5-5-5"
+            />
+          </svg>
+        </button>
+      </div>
 
+      <div className="card-actions justify-center">
+        <Link to="/addBook">
+          <button className="btn btn-primary">Add Book</button>
+        </Link>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ml-10 mt-10">
         {filteredData?.map((book: IBooks) => (
@@ -93,9 +96,11 @@ export default function AllBooks() {
                 <span className="font-bold">Published:</span>{" "}
                 <span className="text-blue-400">{book.publication_date}</span>
               </p>
-              <div className="card-actions justify-center">
-                <button className="btn btn-primary">Add Book</button>
-              </div>
+              {/* <div className="card-actions justify-center">
+                <Link to="/addBook">
+                  <button className="btn btn-primary">Add Book</button>
+                </Link>
+              </div> */}
             </div>
           </div>
         ))}
