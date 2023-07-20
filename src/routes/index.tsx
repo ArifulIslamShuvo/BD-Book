@@ -5,6 +5,7 @@ import Login from '../page/Login';
 import Register from '../page/Register';
 import PrivateRoute from './PrivateRoute';
 import BookDetails from '../page/BookDetails';
+import AllBooks from '../page/AllBooks';
 
 
 const routes = createBrowserRouter([
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
               <BookDetails />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/all-books",
+        element: <AllBooks />,
       },
       {
         path:'/login',
