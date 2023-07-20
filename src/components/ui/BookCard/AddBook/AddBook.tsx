@@ -49,68 +49,7 @@ function AddBook() {
     });
   };
   return (
-    // <>
-    //   <div>
-    //     <h3 className="text-center text-2xl text-gray-100 font-bold">
-    //       Add New Book
-    //     </h3>
-    //   </div>
-    //   <div className="w-[40%] mx-auto bg-gray-200 p-5 m-3">
-    //     <form onSubmit={handleSubmit}>
-    //       <div className="py-2">
-    //         <label className="text-blue-700 text-xl">Title:</label>
-    //         <input
-    //           type="text"
-    //           className="border-solid borderblue-700 text-xl border py-2 px-4 w-full rounded text-gray-700"
-    //           name="title"
-    //           value={formData.title}
-    //           onChange={handleChange}
-    //           placeholder="book title"
-    //           required
-    //         />
-    //       </div>
-    //       <div className="py-2">
-    //         <label className="text-blue-700 text-xl">Author:</label>
-    //         <input
-    //           type="text"
-    //           className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
-    //           name="author"
-    //           value={formData.author}
-    //           onChange={handleChange}
-    //           placeholder="Author name"
-    //           required
-    //         />
-    //       </div>
-    //       <div className="py-2">
-    //         <label>Image:</label>
-    //         <input
-    //           type="text"
-    //           className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
-    //           name="img"
-    //           value={formData.img}
-    //           onChange={handleChange}
-    //           placeholder="Image Link here"
-    //           required
-    //         />
-    //       </div>
-    //       <div className="py-2">
-    //         <label className="text-blue-700 text-xl">Genre:</label>
-    //         <input
-    //           type="text"
-    //           className="border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700"
-    //           name="genre"
-    //           value={formData.genre}
-    //           onChange={handleChange}
-    //           placeholder="Genre"
-    //           required
-    //         />
-    //       </div>
-    //       <button type="submit" className="btn btn-primary">
-    //         Submit
-    //       </button>
-    //     </form>
-    //   </div>
-    // </>
+    
     <div className="max-w-[700px] mx-auto mt-10 bg-slate-100 p-10 rounded-lg">
     <h1 className="text-2xl text-blue-700 font-medium text-center pb-4">
       Add New Book
