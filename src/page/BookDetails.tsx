@@ -6,11 +6,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-import { useNavigate, useParams } from "react-router-dom";
-import { useDeleteBookMutation, 
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  useDeleteBookMutation,
   useGetReviewsQuery,
-   usePostReviewMutation,
-    useSingleBookQuery } from "../redux/features/product/bookApi";
+  usePostReviewMutation,
+  useSingleBookQuery,
+} from "../redux/features/product/bookApi";
 import { useState } from "react";
 import { useAppDispatch } from "../redux/hooks";
 import { deleteSingleBook } from "../redux/features/product/bookSlice";
@@ -37,9 +39,8 @@ export default function BookDetails() {
       navigate("/");
     }
   };
-// -----------------------
+  // -----------------------
   const [postReview] = usePostReviewMutation();
-  const { data:book } = useGetReviewsQuery(id);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -76,10 +77,16 @@ export default function BookDetails() {
             <span className="font-bold px-2">{data?.publication_date}</span>
           </p>
           <div className="">
-            <button className="btn btn-warning mr-4">Edit Book</button>
-            <button 
-            onClick={() => handleDelete(data?._id)}
-            className="btn btn-error">Delete Book</button>
+            <Link to={`/editBook/${data?._id}`}>
+              <button className="btn btn-warning mr-4">Edit Book</button>
+            </Link>
+
+            <button
+              onClick={() => handleDelete(data?._id)}
+              className="btn btn-error"
+            >
+              Delete Book
+            </button>
           </div>
         </div>
       </div>
@@ -96,11 +103,11 @@ export default function BookDetails() {
             type="submit"
             className="btn bg-primary p-4 rounded-lg ml-2 cursor-pointer"
           >
-           Send
+            Send
           </button>
         </form>
       </div>
-      {book?.reviews?.map((review: string) => (
+      {data?.reviews?.map((review: string) => (
         <>
           <div className="flex items-center justify-start max-w-full mx-auto  pb-4 px-32 pt-1">
             <div className="w-10 rounded-full mr-4">
@@ -112,6 +119,6 @@ export default function BookDetails() {
           </div>
         </>
       ))}
-      </div>
+    </div>
   );
 }

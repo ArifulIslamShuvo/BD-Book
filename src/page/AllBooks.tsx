@@ -73,11 +73,13 @@ export default function AllBooks() {
         {filteredData?.map((book: IBooks) => (
           <div
             key={book._id}
-            className="card card-compact md:w-96 bg-red-100 shadow-xl"
+            className="card card-compact md:w-[350px] bg-zinc-100 shadow-xl"
           >
             <Link to={`/book-details/${book?._id}`}>
               <figure>
-                <img src={book?.img} className="h-40 pt-5" alt="Shoes" />
+                <div className="border-b-2 border-blue-700">
+                  <img src={book?.img} className="h-40 my-5 w-32" alt="Shoes" />
+                </div>
               </figure>
             </Link>
 
