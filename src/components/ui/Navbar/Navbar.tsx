@@ -84,12 +84,15 @@ function Navbar() {
           </>
         )}
         {user.email && (
-          <a onClick={handleLogout} className="btn btn-error">
+          <a onClick={handleLogout} className="btn btn-primary mr-5">
             Logout
           </a>
         )}
       </div>
+      
     </div>
+//    
+    
   );
 }
 

@@ -10,12 +10,12 @@ const bookApi = api.injectEndpoints({
       providesTags: ["books"],
     }),
     singleBook: builder.query({
-      query: (id) => `/book/${id}`,
+      query: (id) => `/books/${id}`,
       providesTags: ["books"],
     }),
     addBook: builder.mutation<IBooks, Partial<IBooks>>({
       query: (data) => ({
-        url: "/book",
+        url: "/books",
         method: "POST",
         body: data,
       }),

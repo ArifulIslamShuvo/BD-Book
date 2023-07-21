@@ -27,6 +27,7 @@ function AddBook() {
   });
 
   const [addBook] = useAddBookMutation();
+console.log(addBook);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -38,6 +39,7 @@ function AddBook() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     addBook(formData);
+    
     toast("Add new book successfully");
     setFormData({
       title: "",
