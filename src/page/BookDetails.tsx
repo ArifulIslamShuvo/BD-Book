@@ -19,8 +19,8 @@ import { deleteSingleBook } from "../redux/features/product/bookSlice";
 
 export default function BookDetails() {
   const { id } = useParams();
-
   const { data, isLoading, error } = useSingleBookQuery(id);
+  const { data: book } = useGetReviewsQuery(id);
   console.log(data);
   console.log(isLoading);
   console.log(error);
@@ -107,7 +107,7 @@ export default function BookDetails() {
           </button>
         </form>
       </div>
-      {data?.reviews?.map((review: string) => (
+      {book?.reviews?.map((review: string) => (
         <>
           <div className="flex items-center justify-start max-w-full mx-auto  pb-4 px-32 pt-1">
             <div className="w-10 rounded-full mr-4">

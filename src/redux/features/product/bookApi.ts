@@ -44,12 +44,12 @@ const bookApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["reviews"],
+      invalidatesTags: ["books"],
     }),
 
     getReviews: builder.query({
       query: (id) => `/review/${id}`,
-      providesTags: ["reviews"],
+      providesTags: ["books"],
     }),
   }),
 });
