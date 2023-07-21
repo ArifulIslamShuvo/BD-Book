@@ -7,10 +7,9 @@
 import { Link } from "react-router-dom";
 import { useGetBooksQuery } from "../redux/features/product/bookApi";
 import { IBooks } from "../types/globalTypes";
-import BookCard from "./ui/BookCard/BookCard";
 
 export default function Books() {
-  const { data, isLoading, error } = useGetBooksQuery(undefined);
+  const { data } = useGetBooksQuery(undefined);
 
   return (
     <div className="text-center py-8">
