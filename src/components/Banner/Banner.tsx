@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
  
 import bg from "../../assets/rptgtpxd-1396254731.avif"; 

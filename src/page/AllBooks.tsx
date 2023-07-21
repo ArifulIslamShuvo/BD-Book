@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -13,6 +14,7 @@ import { setSearchTerm } from "../redux/features/product/searchSlice";
 
 export default function AllBooks() {
   const { data, isLoading, error } = useGetBooksQuery(undefined);
+console.log(isLoading, error);
 
   const searchTerm = useAppSelector((state) => state.searchBook);
   const dispatch = useAppDispatch();
