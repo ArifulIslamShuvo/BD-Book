@@ -1,29 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+// bookSlice.ts
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface FilterState {
-  genre: string | null;
-  publicationYear: string | null;
+interface Book {
+  id: number;
+  title: string;
+  author: string;
+  genre: string;
+  img: string;
 }
 
-const initialState: FilterState = {
-  genre: null,
-  publicationYear: null,
+interface BookState {
+  books: Book[];
+}
+
+const initialState: BookState = {
+  books: [],
 };
 
-const bookSlice = createSlice({
-  name: "book",
+const BookSlice = createSlice({
+  name: "books",
   initialState,
   reducers: {
-    setGenreFilter: (state, action: PayloadAction<string | null>) => {
-      state.genre = action.payload;
+    setBooks: (state, action: PayloadAction<Book[]>) => {
+      state.books = action.payload;
     },
-    setPublicationYearFilter: (state, action: PayloadAction<string | null>) => {
-      state.publicationYear = action.payload;
+    deleteSingleBook: (state, action: PayloadAction<number>) => {
+      state.books = state.books.filter((book) => book.id !== action.payload);
     },
   },
 });
 
-export const { setGenreFilter, setPublicationYearFilter } = bookSlice.actions;
+export const { setBooks, deleteSingleBook } = BookSlice.actions;
 
-export default bookSlice.reducer;
+export default BookSlice.reducer;

@@ -6,10 +6,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-import { useParams } from "react-router-dom";
-import { useGetReviewsQuery, usePostReviewMutation, useSingleBookQuery } from "../redux/features/product/bookApi";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDeleteBookMutation, 
+  useGetReviewsQuery,
+   usePostReviewMutation,
+    useSingleBookQuery } from "../redux/features/product/bookApi";
 import { useState } from "react";
 import { useAppDispatch } from "../redux/hooks";
+import { deleteSingleBook } from "../redux/features/product/bookSlice";
 
 export default function BookDetails() {
   const { id } = useParams();
@@ -22,6 +26,18 @@ export default function BookDetails() {
   const [inputValue, setInputValue] = useState<string>("");
   const dispatch = useAppDispatch();
 
+  const [deleteBook] = useDeleteBookMutation();
+  const navigate = useNavigate();
+
+  const handleDelete = (id: number) => {
+    const confirmed = window.confirm("Are you sure delete book");
+    if (confirmed) {
+      deleteBook(id);
+      dispatch(deleteSingleBook(id));
+      navigate("/");
+    }
+  };
+// -----------------------
   const [postReview] = usePostReviewMutation();
   const { data:book } = useGetReviewsQuery(id);
 
@@ -61,7 +77,9 @@ export default function BookDetails() {
           </p>
           <div className="">
             <button className="btn btn-warning mr-4">Edit Book</button>
-            <button className="btn btn-error">Delete Book</button>
+            <button 
+            onClick={() => handleDelete(data?._id)}
+            className="btn btn-error">Delete Book</button>
           </div>
         </div>
       </div>
